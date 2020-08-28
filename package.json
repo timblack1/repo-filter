@@ -16,8 +16,8 @@
     "es-dev-server": "^1.5.0"
   },
   "name": "repo-filter",
-  "version": "0.0.0",
-  "description": "Webcomponent repo-filter following open-wc recommendations",
+  "version": "1.0.0",
+  "description": "repo-filter lets you display and filter one Github user's repositories",
   "author": "repo-filter",
   "license": "MIT",
   "dependencies": {

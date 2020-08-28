@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "repo-filter",
-      "description": "An application with a title and an action counter",
+      "description": "repo-filter lets you display and filter one Github user's repositories",
       "properties": [
         {
           "name": "title",
