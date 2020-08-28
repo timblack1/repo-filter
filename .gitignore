@@ -19,3 +19,6 @@
 /_site/
 /dist/
 /out-tsc/
+
+# config file
+.env-config.js

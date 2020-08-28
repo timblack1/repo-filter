@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { openWcLogo } from './open-wc-logo.js';
 import '../node_modules/@polymer/paper-input/paper-input.js';
+import { config } from '../.env-config.js';
 
 export class AppMain extends LitElement {
   static get properties() {
@@ -109,12 +110,14 @@ export class AppMain extends LitElement {
   /**
    * Username changed event handler
    *
-   * @param {*} event
+   * @param { object } event
    * @memberof AppMain
    */
-  // usernameChanged (event) {
-  //   // TODO: Start here.  Get the user's repos
-  // }
+  usernameChanged(event) {
+    // TODO: Start here.  Get the user's repos
+    this.token = config.githubPersonalAccessToken;
+    this.tmp = event;
+  }
 }
 
 customElements.define('app-main', AppMain);

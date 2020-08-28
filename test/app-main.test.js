@@ -26,12 +26,12 @@ describe('AppMain', () => {
     expect(filterInput.label).to.equal("Filter this user's repos for...");
   });
 
-  // it('permits the user to search for a Github user', () => {
-  //   const handler = element.usernameChanged;
-  //   expect(handler).to.exist;
-  //   // TODO: Start here.  Test this method.
-  //   handler();
-  // });
+  it('permits the user to search for a Github user', () => {
+    const handler = element.usernameChanged;
+    expect(handler).to.exist;
+    // TODO: Start here.  Test this method.
+    handler({});
+  });
 
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
