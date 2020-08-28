@@ -1,10 +1,18 @@
 import { LitElement, html, css } from 'lit-element';
 import { openWcLogo } from './open-wc-logo.js';
+import '../node_modules/@polymer/paper-input/paper-input.js';
 
 export class AppMain extends LitElement {
   static get properties() {
     return {
-      title: { type: String },
+      /**
+       * The Github username whose repos we want to display
+       */
+      username: { type: String },
+      /**
+       * Repos associated with the currently-selected Github username
+       */
+      repos: { type: Array },
       page: { type: String },
     };
   }
@@ -42,6 +50,10 @@ export class AppMain extends LitElement {
         }
       }
 
+      paper-input {
+        font-size: initial;
+      }
+
       .app-footer {
         font-size: calc(12px + 0.5vmin);
         align-items: center;
@@ -53,11 +65,33 @@ export class AppMain extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+    this.repos = [];
+  }
+
   render() {
     return html`
       <main>
         <div class="logo">${openWcLogo}</div>
         <h1>Repo Filter</h1>
+
+        <paper-input
+          class="username"
+          label="Enter a Github user name"
+          @input="${this.usernameChanged}"
+        ></paper-input>
+
+        <paper-input
+          class="filter"
+          label="Filter this user's repos for..."
+        ></paper-input>
+
+        <div class="repo-list">
+          ${this.repos.map(
+            repo => html` <repo-view .repo="${repo}"></repo-view> `
+          )}
+        </div>
       </main>
 
       <p class="app-footer">
@@ -65,12 +99,22 @@ export class AppMain extends LitElement {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/timblack1"
+          href="https://www.linkedin.com/in/timblack11/"
           >Tim Black</a
         >.
       </p>
     `;
   }
+
+  /**
+   * Username changed event handler
+   *
+   * @param {*} event
+   * @memberof AppMain
+   */
+  // usernameChanged (event) {
+  //   // TODO: Start here.  Get the user's repos
+  // }
 }
 
 customElements.define('app-main', AppMain);

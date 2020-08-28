@@ -14,6 +14,25 @@ describe('AppMain', () => {
     expect(h1.textContent).to.equal('Repo Filter');
   });
 
+  it('renders a username input', () => {
+    const usernameInput = element.shadowRoot.querySelector('.username');
+    expect(usernameInput).to.exist;
+    expect(usernameInput.label).to.equal('Enter a Github user name');
+  });
+
+  it('renders a filter input', () => {
+    const filterInput = element.shadowRoot.querySelector('.filter');
+    expect(filterInput).to.exist;
+    expect(filterInput.label).to.equal("Filter this user's repos for...");
+  });
+
+  // it('permits the user to search for a Github user', () => {
+  //   const handler = element.usernameChanged;
+  //   expect(handler).to.exist;
+  //   // TODO: Start here.  Test this method.
+  //   handler();
+  // });
+
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
   });
