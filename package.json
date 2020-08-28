@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "karma start --coverage",
-    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:watch": "karma start --auto-watch=true --single-run=false --coverage",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
     "start": "es-dev-server --app-index index.html --node-resolve --open --watch"
