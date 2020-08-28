@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { openWcLogo } from './open-wc-logo.js';
 
-export class RepoFilter extends LitElement {
+export class AppMain extends LitElement {
   static get properties() {
     return {
       title: { type: String },
@@ -57,28 +57,22 @@ export class RepoFilter extends LitElement {
     return html`
       <main>
         <div class="logo">${openWcLogo}</div>
-        <h1>My app</h1>
+        <h1>Repo Filter</h1>
 
-        <p>Edit <code>src/RepoFilter.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/developing/#code-examples"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
       </main>
 
       <p class="app-footer">
-        🚽 Made with love by
+        Made for fun by
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
+          href="https://github.com/timblack1"
+          >Tim Black</a
         >.
       </p>
     `;
   }
 }
+
+
+customElements.define('app-main', AppMain);

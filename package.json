@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "karma start --coverage",
-    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:watch": "karma start --auto-watch=true --single-run=false --coverage",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
     "start": "es-dev-server --app-index index.html --node-resolve --open --watch"
@@ -16,8 +16,8 @@
     "es-dev-server": "^1.5.0"
   },
   "name": "repo-filter",
-  "version": "0.0.0",
-  "description": "Webcomponent repo-filter following open-wc recommendations",
+  "version": "1.0.0",
+  "description": "repo-filter lets you display and filter one Github user's repositories",
   "author": "repo-filter",
   "license": "MIT",
   "dependencies": {
