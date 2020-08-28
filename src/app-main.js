@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { openWcLogo } from './open-wc-logo.js';
 
-export class RepoFilter extends LitElement {
+export class AppMain extends LitElement {
   static get properties() {
     return {
       title: { type: String },
@@ -73,3 +73,6 @@ export class RepoFilter extends LitElement {
     `;
   }
 }
+
+
+customElements.define('app-main', AppMain);
