@@ -58,7 +58,6 @@ export class AppMain extends LitElement {
       <main>
         <div class="logo">${openWcLogo}</div>
         <h1>Repo Filter</h1>
-
       </main>
 
       <p class="app-footer">
@@ -73,6 +72,5 @@ export class AppMain extends LitElement {
     `;
   }
 }
-
 
 customElements.define('app-main', AppMain);

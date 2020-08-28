@@ -5,9 +5,7 @@ import '../src/app-main.js';
 describe('AppMain', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`
-      <app-main></app-main>
-    `);
+    element = await fixture(html` <app-main></app-main> `);
   });
 
   it('renders a h1', () => {
