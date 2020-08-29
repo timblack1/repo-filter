@@ -70,6 +70,11 @@ export class AppMain extends LitElement {
         }
       }
 
+      .inputs {
+        margin: 0 auto;
+        max-width: 288px;
+        text-align: left;
+      }
       paper-input {
         font-size: initial;
       }
@@ -81,10 +86,6 @@ export class AppMain extends LitElement {
       .app-footer {
         font-size: var(--footer-font-size);
         align-items: center;
-      }
-
-      .app-footer a {
-        margin-left: 5px;
       }
     `;
   }
@@ -102,18 +103,20 @@ export class AppMain extends LitElement {
         <div class="logo">${openWcLogo}</div>
         <h1>Repo Filter</h1>
 
-        <paper-input
-          class="username"
-          label="Enter a Github user name"
-          autofocus
-          @input="${this.usernameChanged}"
-        ></paper-input>
+        <div class="inputs">
+          <paper-input
+            class="username"
+            label="Enter a Github user name"
+            autofocus
+            @input="${this.usernameChanged}"
+          ></paper-input>
 
-        <paper-input
-          class="filter"
-          label="Filter this user's repos for..."
-          @input="${this.filterChanged}"
-        ></paper-input>
+          <paper-input
+            class="filter"
+            label="Filter this user's repos for..."
+            @input="${this.filterChanged}"
+          ></paper-input>
+        </div>
 
         <p class="error-message">${this.errorMessage}</p>
 
