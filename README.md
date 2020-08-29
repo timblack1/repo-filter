@@ -11,6 +11,8 @@ You may also filter the list of repositories by name by typing some text into th
 The application has a light mode and a dark mode, which you can toggle between by clicking on the toggle button.
 Your preference is saved and persists between page refreshes.
 
+An example of this application is deployed at https://repo-filter.alwaysreformed.com/.
+
 ## Installation & Startup
 
 To install and run this application:
