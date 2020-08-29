@@ -26,11 +26,33 @@ describe('AppMain', () => {
     expect(filterInput.label).to.equal("Filter this user's repos for...");
   });
 
-  it('permits the user to search for a Github user', () => {
-    const handler = element.usernameChanged;
-    expect(handler).to.exist;
-    // TODO: Start here.  Test this method.
-    handler({});
+  it("permits the user to search for a Github user's repos", async () => {
+    const method = element.usernameChanged.bind(element);
+    expect(method).to.exist;
+    await method({ target: { value: 'timblack1' } });
+    expect(element.repos.length).to.be.greaterThan(0);
+
+    await method({ target: { value: 'timblack1-doesnt-exist' } });
+    expect(element.repos.length).to.equal(0);
+    // expect(element.errorMessage).to.equal('This username could not be found.')
+  });
+
+  it("displays a list of the selected Github user's repositories", async () => {
+    const method = element.usernameChanged.bind(element);
+    await method({ target: { value: 'timblack1' } });
+    const repoList = element.shadowRoot.querySelector('.repo-list');
+    expect(repoList.childElementCount).to.be.greaterThan(0);
+  });
+
+  it('permits the user to filter the list of displayed repositories', async () => {
+    let method = element.usernameChanged.bind(element);
+    await method({ target: { value: 'timblack1' } });
+    const repoList = element.shadowRoot.querySelector('.repo-list');
+    expect(repoList.childElementCount).to.equal(32);
+
+    method = element.filterChanged.bind(element);
+    await method({ target: { value: 'angular' } });
+    expect(repoList.childElementCount).to.equal(1);
   });
 
   it('passes the a11y audit', async () => {

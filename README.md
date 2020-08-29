@@ -30,7 +30,7 @@ npm start
 - `start` runs the app for development, reloading on file changes
 - `start:build` runs the app after it has been built using the build command
 - `build` builds the app and outputs it in the `dist` directory
-- `test` runs the test suite with Karma
+- `test` runs the test suite with Karma, and displays test coverage
 - `lint` runs the linter for the project
 
 ## Tooling configs
