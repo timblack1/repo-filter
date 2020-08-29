@@ -36,6 +36,9 @@ export class AppMain extends LitElement {
         --blue: #0077ff;
         --strong-contrast-background-color: #ac42f8;
         --light-contrast-background-color: #ecf3fc;
+        --repo-hover-color: white;
+        --repo-hover-bgcolor: #972de2;
+        --transition-duration: 0.2s;
 
         min-height: 100vh;
         display: flex;

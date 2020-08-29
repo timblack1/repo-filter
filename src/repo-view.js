@@ -21,6 +21,13 @@ export class RepoView extends LitElement {
         background-color: var(--light-contrast-background-color);
         border: 0.3vmin solid var(--strong-contrast-background-color);
         border-radius: 0.5vmin;
+        transition: background-color var(--transition-duration),
+          border-color var(--transition-duration);
+      }
+
+      .container:hover {
+        background-color: var(--repo-hover-color);
+        border-color: var(--repo-hover-bgcolor);
       }
 
       .name-description,
