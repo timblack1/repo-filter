@@ -15,6 +15,10 @@ export class RepoView extends LitElement {
       :host {
       }
 
+      :host(.dark-mode) a {
+        color: #70b1fc;
+      }
+
       .container {
         margin: calc(0.7vmin) 0;
         padding: calc(0.7vmin);
@@ -28,6 +32,13 @@ export class RepoView extends LitElement {
       .container:hover {
         background-color: var(--repo-hover-color);
         border-color: var(--repo-hover-bgcolor);
+      }
+
+      a {
+        color: var(--anchor-color);
+      }
+      a:visited {
+        color: var(--anchor-color-visited);
       }
 
       .name-description,

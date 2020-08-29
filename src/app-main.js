@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { openWcLogo } from './open-wc-logo.js';
 import '../node_modules/@polymer/paper-input/paper-input.js';
+import '../node_modules/@polymer/paper-toggle-button/paper-toggle-button.js';
 import './repo-view.js';
 import { model } from './model.js';
 
@@ -27,6 +28,10 @@ export class AppMain extends LitElement {
        * Spin logo
        */
       spinLogo: { type: Boolean },
+      /**
+       * Dark mode
+       */
+      darkMode: { type: Boolean },
     };
   }
 
@@ -39,8 +44,6 @@ export class AppMain extends LitElement {
         --purple: #9b00ff;
         --blue: #0077ff;
         --strong-contrast-background-color: #ac42f8;
-        --light-contrast-background-color: #ecf3fc;
-        --repo-hover-color: white;
         --repo-hover-bgcolor: #972de2;
         --transition-duration: 0.2s;
         --stop-from-degrees: 0deg;
@@ -50,15 +53,38 @@ export class AppMain extends LitElement {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        font-size: var(--heading-font-size);
-        color: #1a2b42;
+        color: var(--font-color);
         max-width: 960px;
         margin: 0 auto;
         text-align: center;
       }
+      :host(.light-mode) {
+        --font-color: #1a2b42;
+        --repo-hover-color: white;
+        --light-contrast-background-color: #ecf3fc;
+        --paper-toggle-button-label-color: var(--font-color);
+        --paper-input-container-color: var(--font-color);
+        --anchor-color: #0000ee;
+        --anchor-color-visited: #551a8b;
+      }
+      :host(.dark-mode) {
+        --font-color: #e8f1fd;
+        --repo-hover-color: #000000;
+        --light-contrast-background-color: #3f3f3f;
+        --paper-toggle-button-label-color: var(--font-color);
+        --paper-input-container-color: var(--font-color);
+        --paper-input-container-input-color: 'white';
+        --paper-input-container-focus-color: var(--blue);
+        --anchor-color: #70b1fc;
+        --anchor-color-visited: #ac42f8;
+      }
 
       main {
         flex-grow: 1;
+      }
+
+      h1 {
+        font-size: var(--heading-font-size);
       }
 
       .logo > svg {
@@ -104,6 +130,13 @@ export class AppMain extends LitElement {
         font-size: var(--footer-font-size);
         align-items: center;
       }
+
+      a {
+        color: var(--anchor-color);
+      }
+      a:visited {
+        color: var(--anchor-color-visited);
+      }
     `;
   }
 
@@ -113,6 +146,16 @@ export class AppMain extends LitElement {
     this.errorMessage = '';
     this.filter = '';
     this.spinLogo = false;
+    if (
+      typeof window.localStorage.getItem('darkMode') !== 'undefined' &&
+      window.localStorage.getItem('darkMode') === 'true'
+    ) {
+      this.darkMode = true;
+      this.setDarkMode();
+    } else {
+      this.darkMode = false;
+      this.setLightMode();
+    }
   }
 
   render() {
@@ -138,6 +181,12 @@ export class AppMain extends LitElement {
             @focus="${this.spinLogoStart}"
             @focusout="${this.spinLogoStop}"
           ></paper-input>
+
+          <paper-toggle-button
+            @click="${this.toggleDarkMode}"
+            ?checked=${this.darkMode}
+            >${this.darkMode ? 'Dark' : 'Light'} mode</paper-toggle-button
+          >
         </div>
 
         <p class="error-message">${this.errorMessage}</p>
@@ -223,6 +272,34 @@ export class AppMain extends LitElement {
 
     // Stop spinning the logo
     this.spinLogo = false;
+  }
+
+  /**
+   * Toggle dark mode
+   *
+   * @memberof AppMain
+   */
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+    if (this.darkMode) {
+      this.setDarkMode();
+    } else {
+      this.setLightMode();
+    }
+  }
+
+  setDarkMode() {
+    window.localStorage.setItem('darkMode', this.darkMode);
+    this.classList.add('dark-mode');
+    this.classList.remove('light-mode');
+    document.body.style.backgroundColor = '#202020';
+  }
+
+  setLightMode() {
+    window.localStorage.setItem('darkMode', this.darkMode);
+    this.classList.add('light-mode');
+    this.classList.remove('dark-mode');
+    document.body.style.backgroundColor = '#ededed';
   }
 }
 

@@ -1,4 +1,5 @@
 import { html, fixture, expect } from '@open-wc/testing';
+import sinon from 'sinon';
 
 import '../src/app-main.js';
 
@@ -8,7 +9,7 @@ describe('AppMain', () => {
     element = await fixture(html` <app-main></app-main> `);
   });
 
-  it('renders a h1', () => {
+  it('renders an h1', () => {
     const h1 = element.shadowRoot.querySelector('h1');
     expect(h1).to.exist;
     expect(h1.textContent).to.equal('Repo Filter');
@@ -50,19 +51,87 @@ describe('AppMain', () => {
     const repoList = element.shadowRoot.querySelector('.repo-list');
     expect(repoList.childElementCount).to.equal(32);
 
+    await method({ target: { value: '' } });
+    expect(repoList.childElementCount).to.equal(0);
+
+    method = element.usernameChanged.bind(element);
+    await method({ target: { value: 'timblack1' } });
     method = element.filterChanged.bind(element);
     await method({ target: { value: 'angular' } });
     expect(repoList.childElementCount).to.equal(1);
+
+    await method({ target: { value: '' } });
+    expect(repoList.childElementCount).to.equal(32);
   });
 
   it('should start and stop spinning the logo', async () => {
     let method = element.spinLogoStart.bind(element);
-    method();
+    await method();
     expect(element.spinLogo).to.equal(true);
+    expect(element.shadowRoot.querySelector('.logo').classList.contains('spin'))
+      .to.be.true;
 
     method = element.spinLogoStop.bind(element);
-    method();
+    await method();
     expect(element.spinLogo).to.equal(false);
+    expect(element.shadowRoot.querySelector('.logo').classList.contains('spin'))
+      .to.be.false;
+  });
+
+  it('permits the user to toggle from light mode to dark mode', async () => {
+    const setDarkModeSpy = sinon.spy(element, 'setDarkMode');
+    const setLightModeSpy = sinon.spy(element, 'setLightMode');
+
+    element.darkMode = false;
+    const method = element.toggleDarkMode.bind(element);
+    method();
+    expect(element.darkMode).to.equal(true);
+    expect(element.classList.contains('dark-mode')).to.be.true;
+    expect(element.classList.contains('light-mode')).to.be.false;
+    expect(setDarkModeSpy.callCount).to.equal(1);
+    expect(setLightModeSpy.callCount).to.equal(0);
+  });
+
+  it('permits the user to toggle from dark mode to light mode', async () => {
+    const setDarkModeSpy = sinon.spy(element, 'setDarkMode');
+    const setLightModeSpy = sinon.spy(element, 'setLightMode');
+
+    element.darkMode = true;
+    const method = element.toggleDarkMode.bind(element);
+    method();
+    expect(element.darkMode).to.equal(false);
+    expect(element.classList.contains('dark-mode')).to.be.false;
+    expect(element.classList.contains('light-mode')).to.be.true;
+    expect(setDarkModeSpy.callCount).to.equal(0);
+    expect(setLightModeSpy.callCount).to.equal(1);
+  });
+
+  it('permits the user to switch from light mode to dark mode', async () => {
+    const setDarkModeSpy = sinon.spy(element, 'setDarkMode');
+    const setLightModeSpy = sinon.spy(element, 'setLightMode');
+
+    element.darkMode = false;
+    const method = element.toggleDarkMode.bind(element);
+    method();
+    expect(element.darkMode).to.equal(true);
+    expect(element.classList.contains('dark-mode')).to.be.true;
+    expect(element.classList.contains('light-mode')).to.be.false;
+    expect(setDarkModeSpy.callCount).to.equal(1);
+    expect(setLightModeSpy.callCount).to.equal(0);
+  });
+
+  it('permits the user to switch from dark mode to light mode', async () => {
+    const setDarkModeSpy = sinon.spy(element, 'setDarkMode');
+    const setLightModeSpy = sinon.spy(element, 'setLightMode');
+
+    element.darkMode = true;
+    const method = element.toggleDarkMode.bind(element);
+    method();
+    expect(element.darkMode).to.equal(false);
+    expect(element.classList.contains('dark-mode')).to.be.false;
+    expect(element.classList.contains('light-mode')).to.be.true;
+    expect(setDarkModeSpy.callCount).to.equal(0);
+    expect(setLightModeSpy.callCount).to.equal(1);
   });
 
   it('passes the a11y audit', async () => {
