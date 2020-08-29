@@ -23,6 +23,10 @@ export class AppMain extends LitElement {
        * Error message to display to the user
        */
       errorMessage: { type: String },
+      /**
+       * Spin logo
+       */
+      spinLogo: { type: Boolean },
     };
   }
 
@@ -39,6 +43,7 @@ export class AppMain extends LitElement {
         --repo-hover-color: white;
         --repo-hover-bgcolor: #972de2;
         --transition-duration: 0.2s;
+        --stop-from-degrees: 0deg;
 
         min-height: 100vh;
         display: flex;
@@ -58,12 +63,24 @@ export class AppMain extends LitElement {
 
       .logo > svg {
         margin-top: 36px;
+        animation: app-logo-spin-stop 1 2s ease-in-out;
+      }
+      .logo.spin > svg {
         animation: app-logo-spin infinite 20s linear;
       }
 
       @keyframes app-logo-spin {
         from {
           transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes app-logo-spin-stop {
+        from {
+          transform: rotate(var(--stop-from-degrees));
         }
         to {
           transform: rotate(360deg);
@@ -95,12 +112,13 @@ export class AppMain extends LitElement {
     this.repos = [];
     this.errorMessage = '';
     this.filter = '';
+    this.spinLogo = false;
   }
 
   render() {
     return html`
       <main>
-        <div class="logo">${openWcLogo}</div>
+        <div class="logo ${this.spinLogo ? 'spin' : ''}">${openWcLogo}</div>
         <h1>Repo Filter</h1>
 
         <div class="inputs">
@@ -109,12 +127,16 @@ export class AppMain extends LitElement {
             label="Enter a Github user name"
             autofocus
             @input="${this.usernameChanged}"
+            @focus="${this.spinLogoStart}"
+            @focusout="${this.spinLogoStop}"
           ></paper-input>
 
           <paper-input
             class="filter"
             label="Filter this user's repos for..."
             @input="${this.filterChanged}"
+            @focus="${this.spinLogoStart}"
+            @focusout="${this.spinLogoStop}"
           ></paper-input>
         </div>
 
@@ -167,6 +189,40 @@ export class AppMain extends LitElement {
    */
   filterChanged(event) {
     this.filter = event.target.value;
+  }
+
+  /**
+   * Start spinning the logo
+   *
+   * @memberof AppMain
+   */
+  spinLogoStart() {
+    this.spinLogo = true;
+  }
+
+  /**
+   * Stop spinning the logo
+   *
+   * @memberof AppMain
+   */
+  spinLogoStop() {
+    // Get current rotation in degrees
+    const tr = window
+      .getComputedStyle(this.shadowRoot.querySelector('.logo > svg'), null)
+      .getPropertyValue('transform');
+    let values = tr.split('(')[1];
+    // eslint-disable-next-line prefer-destructuring
+    values = values.split(')')[0];
+    values = values.split(',');
+    const degrees = Math.round(
+      Math.atan2(values[1], values[0]) * (180 / Math.PI)
+    );
+
+    // Update the CSS custom property used in the keyframe
+    this.style.setProperty('--stop-from-degrees', `${degrees}deg`);
+
+    // Stop spinning the logo
+    this.spinLogo = false;
   }
 }
 

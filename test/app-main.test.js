@@ -55,6 +55,16 @@ describe('AppMain', () => {
     expect(repoList.childElementCount).to.equal(1);
   });
 
+  it('should start and stop spinning the logo', async () => {
+    let method = element.spinLogoStart.bind(element);
+    method();
+    expect(element.spinLogo).to.equal(true);
+
+    method = element.spinLogoStop.bind(element);
+    method();
+    expect(element.spinLogo).to.equal(false);
+  });
+
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
   });
