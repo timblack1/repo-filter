@@ -9,6 +9,7 @@ This application permits you to enter a Github username and view a list of repos
 You may also filter the list of repositories by name by typing some text into the filter text box.
 
 The application has a light mode and a dark mode, which you can toggle between by clicking on the toggle button.
+Your preference is saved and persists between page refreshes.
 
 ## Installation & Startup
 
