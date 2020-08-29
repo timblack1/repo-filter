@@ -2,11 +2,15 @@
   <img width="200" src="https://open-wc.org/hero.png"></img>
 </p>
 
-## Open-wc Starter App
+## Repo Filter app
 
-[![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
+This application permits you to enter a Github username and view a list of repositories in that user's Github account.
 
-## Installation & Usage
+You may also filter the list of repositories by name by typing some text into the filter text box.
+
+The application has a light mode and a dark mode, which you can toggle between by clicking on the toggle button.
+
+## Installation & Startup
 
 To install and run this application:
 
@@ -30,11 +34,15 @@ npm start
 - `start` runs the app for development, reloading on file changes
 - `start:build` runs the app after it has been built using the build command
 - `build` builds the app and outputs it in the `dist` directory
+- `deploy` deploys the application to a server
 - `test` runs the test suite with Karma, and displays test coverage
 - `lint` runs the linter for the project
 
-## Tooling configs
+## Development dependency configs
 
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
+For most of the development dependencies, the configuration is in `package.json`.
 
-If you customize the configuration a lot, you can consider moving them to individual files.
+## Credits
+[![](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
+
+This application was built using a simple application template provided by the Open-wc Starter App, and follows open-wc recommendations.
