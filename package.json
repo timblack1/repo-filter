@@ -15,7 +15,7 @@
     "format": "npm run format:eslint && npm run format:prettier"
   },
   "devDependencies": {
-    "@open-wc/building-rollup": "^2.0.2",
+    "@open-wc/building-rollup": "^3.0.2",
     "@open-wc/eslint-config": "^2.0.0",
     "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^4.0.9",
