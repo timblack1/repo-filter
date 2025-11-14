@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "test": "karma start --coverage",
-    "test:watch": "karma start --auto-watch=true --single-run=false --coverage",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider karma start --coverage",
+    "test:watch": "NODE_OPTIONS=--openssl-legacy-provider karma start --auto-watch=true --single-run=false --coverage",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "deploy": "npm run build && rsync -avz dist/* timblack1.webfactional.com:webapps/repofilter/",
     "deploy:nobuild": "rsync -avz * timblack1.webfactional.com:webapps/repofilter/",
